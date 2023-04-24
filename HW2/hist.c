@@ -79,12 +79,18 @@ void operate(int *bins) {
 		{
 			last_num_bin = pace-1; 
 			printf("%.0lf-%.0lf\t%d\n", first_num_bin, last_num_bin, bins[0]);  
-		} 
-		else 
+		}
+		else if ( first_num_bin == 90)
 		{
 
 			last_num_bin = (i+1)*(pace);  
 			printf("%.0lf-%.0lf\t%d\n", first_num_bin, last_num_bin, bins[i]);
+		}
+		else 
+		{
+
+			last_num_bin = (i+1)*(pace);  
+			printf("%.0lf-%.0lf\t%d\n", first_num_bin, last_num_bin-1, bins[i]);
 		}
 	}
 } 

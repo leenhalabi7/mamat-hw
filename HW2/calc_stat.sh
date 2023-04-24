@@ -40,7 +40,7 @@ echo -n  "$min" >> $1_stat/statistics.txt
 
 #calculating max grade
 max=$(echo "$data" | ./max.exe)
-echo "$max" >> $1_stat/statistics.txt
+echo -n "$max" >> $1_stat/statistics.txt
 
 #calculating percentage of the students who passed
 student_num=$( echo "$data" | wc -l)
@@ -59,7 +59,6 @@ while read line; do
 done < <(echo "$hist")
 sum=$sum*100
 (( percentage=sum/student_num ))
-echo $percentage >> $1_stat/statistics.txt 
-
+echo -n "${percentage}%" >> $1_stat/statistics.txt
 
 
