@@ -1,37 +1,46 @@
+#include <string.h>
 #include "student.h"
 
-typedef enum { SUCCESS = 0, FAIL } Result; 
-
-typedef struct stack *pstack_t;
-typedef void *elem_t;
-
-
-
-pstack_t stack_create(size_t max_num_of_elem, size_t elem_size)
-{
-	return malloc(max_num_of_elem * elem_size ); //////////////////////////////////////////////////////////check if null check newded 
+// Function to clone a student
+elem_t student_clone(elem_t e) {
+    pstudent_t student = malloc(sizeof(student_t));
+    // Check if memory allocation is successful
+    if (student == NULL) {
+        return NULL;
+    }
+    pstudent_t source_student = e;
+    // Allocate memory for the student's name
+    student->name = malloc(strlen(source_student->name));
+    // Copy the name from the source student to the new student
+    strcpy(student->name, source_student->name);
+    // Copy the age and id from the source student to the new student
+    student->age = source_student->age;
+    student->id = source_student->id;
+    return student;
 }
 
-
-Result stack_destroy(pstack_t stack)
-{
-	free(pstack_t); 
-	assert(pstack_t ==NULL); /////////////////////////////////////////////////////////////////////////// check how to failure 
-
+// Function to destroy a student
+void student_destroy(elem_t e) {
+    if (e == NULL) {
+        return;
+    }
+    pstudent_t source_student = e;
+    // Free the memory allocated for the student's name
+    if (source_student->name != NULL) {
+        free(source_student->name);
+    }
+    // Free the memory allocated for the student structure
+    free(source_student);
 }
-Result stack_push (pstack_t stack, elem_t e) 
-{
-	
+
+// Function to print a student
+void student_print(elem_t e) {
+    if (e == NULL) {
+        return;
+    }
+    pstudent_t source_student = e;
+    // Print the student's name, age, and id
+    printf("student name: %s, age: %d, id: %d.\n",
+           source_student->name, source_student->age, source_student->id);
+    return;
 }
-
-void stack_pop(pstack_t stack) 
-
-elem_t stack_peek(pstack_t stack) //check if to add null incase of failure/ 
-
-size_t stack_size(pstack_t stack)
-
-bool stack_is_empty(pstack_t stack)
-
-size_t stack_capacity(pstack_t stack)
-
-void stack_print(pstack_t stack)
