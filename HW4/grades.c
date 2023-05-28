@@ -165,11 +165,14 @@ int grades_add_student(struct grades *grades, const char *name, int id) {
     student->name = malloc(strlen((name)+1)*sizeof(char));
     if(student->name == NULL)
     {
+        free(student);
         return -1;
     }
     strcpy(student->name, name);
     student->id = id;
     list_push_back(grades->students, student);
+    free(student->name);
+    free(student);
     return 0;
 }
 
@@ -223,6 +226,8 @@ int grades_add_grade(struct grades *grades,
             }
             strcpy(course->name, name);
             list_push_back(student->courses, course);
+            free(course->name);
+            free(course);
             return 0;
         }
         it = list_next(it);
