@@ -24,7 +24,7 @@ String::String(const String &str){
 }
 
 String::String(const char *str){
-	this->length = strlen(str)+1;
+	this->length = strlen(str);
 	this->data = new char[(this->length) + 1];
 	strcpy(this->data,str);
 }
@@ -81,6 +81,8 @@ void String::split(const char *delimiters, String **output,size_t *size) const {
 	int k = count_substring(delimiters,dup); 
 	*size = (size_t)k;
 	if(output == NULL){ 
+		delete[] dup;
+		delete[] spare;
 		return;
 	}
 	*output = new String[k]; 
@@ -133,7 +135,7 @@ String String::trim() const{
 	while(space_free[j] == *SPACE && j>0){
 		j--;
 	}
-	char* trimmed = new char[j-i+1];
+	char* trimmed = new char[j-i+2];
 	int k=0;
 	while (!(i>j)){
 		trimmed[k] = space_free[i];

@@ -39,15 +39,18 @@ bool Ip::set_value(String val) {
 		if(size!=0){
 			//delete[] out;  ///check we may need to delete if 
 		}
+		delete[] out;
 		return false;
 	}
 	this->mask =WORD-(out[1].trim().to_integer());
 	bool flag;
 	if(this->mask <0 || this->mask>32){
+		delete[] out;
 		return ERROR;
 	}
 	this->int_ip = dots_no_more(out[0],&flag); 
 	this->flag = flag;
+	delete[] out;
 	return(this->flag);
 }
 
@@ -82,16 +85,19 @@ unsigned int dots_no_more(String val, bool *flag){
 			//delete[] out;  //check again!!!!!!!!
 		}
 		*flag = false;
+		delete[] out;
 		return ERROR;
 	}
 	for(int i=0;i<IP_SIZE;i++){
 		address[i] = (out[i]).trim().to_integer();
 		if (address[i]<MIN || address[i]>MAX){
 			*flag = false;
+			delete[] out;
 			return ERROR;
 		}
 		address [i] = address[i]<<BYTE*(IP_SIZE-i-1);
 	}
+	delete[] out;
 	return ((unsigned int)(address[3] | address[2] | address[1] | address[0]));
 }
 
@@ -117,8 +123,3 @@ bool Ip::match_aux(String& packet){
         delete[] sub_packets;
         return flag;
 }
-
-
-
-
-
