@@ -1,1 +1,1 @@
-# mamat-hw
+# Introduction to software systems course tasks 
